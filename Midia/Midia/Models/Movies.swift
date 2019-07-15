@@ -9,9 +9,9 @@
 import Foundation
 
 
-struct Movie {
+struct Movies {
     
-    let movieId: String
+    let movieId: Int
     let title: String
     let artistName: String?
     let releaseDate: Date?
@@ -22,7 +22,7 @@ struct Movie {
     let price: Float?
     
     
-    init(movieId : String,title: String, artistName: String? = nil, releaseDate: Date? = nil, description : String? = nil, coverURL : URL? = nil, duration: Int? = nil, genre : String? = nil, price: Float? = nil) {
+    init(movieId : Int,title: String, artistName: String? = nil, releaseDate: Date? = nil, description : String? = nil, coverURL : URL? = nil, duration: Int? = nil, genre : String? = nil, price: Float? = nil) {
         
         self.movieId = movieId
         self.title = title
@@ -39,11 +39,11 @@ struct Movie {
     
 }
 
-extension Movie: Codable {
+extension Movies: Codable {
     
     enum CodingKeys: String, CodingKey {
-        case movieId = "id"
-        case title = "trackId"
+        case movieId = "trackId"
+        case title = "trackName"
         case artistName
         case releaseDate
         case description = "longDescription"
@@ -57,12 +57,12 @@ extension Movie: Codable {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        movieId = try container.decode(String.self, forKey: .movieId)
+        movieId = try container.decode(Int.self, forKey: .movieId)
         title = try container.decode(String.self, forKey: .title)
         artistName = try container.decodeIfPresent(String.self, forKey: .artistName)
         
         if let releaseDateString = try container.decodeIfPresent(String.self, forKey: .releaseDate) {
-            releaseDate = DateFormatter.booksAPIDateFormatter.date(from: releaseDateString)
+            releaseDate = DateFormatter.movieAPIDateFormatter.date(from: releaseDateString)
         } else {
             releaseDate = nil
         }
@@ -82,7 +82,7 @@ extension Movie: Codable {
         try container.encode(title, forKey: .title)
         try container.encodeIfPresent(artistName, forKey: .artistName)
         if let date = releaseDate {
-            try container.encode(DateFormatter.booksAPIDateFormatter.string(from: date), forKey: .releaseDate)
+            try container.encode(DateFormatter.movieAPIDateFormatter.string(from: date), forKey: .releaseDate)
         }
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(coverURL, forKey: .coverURL)
@@ -94,10 +94,10 @@ extension Movie: Codable {
 }
 
 
-extension Movie: MediaItemProvidable {
+extension Movies: MediaItemProvidable {
     
     var mediaItemId: String {
-        return movieId
+        return String(movieId)
     }
     
     var imageURL: URL? {
