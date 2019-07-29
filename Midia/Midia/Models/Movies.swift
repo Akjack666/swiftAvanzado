@@ -105,3 +105,24 @@ extension Movies: MediaItemProvidable {
     }
     
 }
+
+
+extension Movies: MediaItemDetailedProvidable {
+    var creatorName: String? {
+        return artistName
+    }
+    
+    var rating: Float? {
+        return price
+    }
+    
+    var numberOfReviews: Int? {
+        return duration
+    }
+    
+    var creationDate: Date? {
+        return releaseDate
+    }
+    
+    
+}

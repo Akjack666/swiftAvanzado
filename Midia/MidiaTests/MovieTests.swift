@@ -59,28 +59,26 @@ class MovieTests: XCTestCase {
             XCTFail()
         }
     }
-    /*
+    
     func testDecodeEncodedDetailedMovie() {
         do {
-            let bookData = try encoder.encode(bestMovieEver)
-            XCTAssertNotNil(bookData)
-            let movie = try decoder.decode(Movie.self, from: movieData)
-            XCTAssertNotNil(book)
-            XCTAssertNotNil(book.bookId)
-            XCTAssertNotNil(book.title)
-            XCTAssertNotNil(book.authors)
-            XCTAssert(book.authors!.count > 0)
-            XCTAssertNotNil(book.publishedDate)
-            XCTAssertNotNil(book.description)
-            XCTAssertNotNil(book.coverURL)
-            XCTAssertNotNil(book.rating)
-            XCTAssertNotNil(book.numberOfReviews)
-            XCTAssertNotNil(book.price)
+            let movieData = try encoder.encode(bestMovieEver)
+            XCTAssertNotNil(movieData)
+            let movie = try decoder.decode(Movies.self, from: movieData)
+            XCTAssertNotNil(movie)
+            XCTAssertNotNil(movie.movieId)
+            XCTAssertNotNil(movie.artistName)
+            XCTAssertNotNil(movie.description)
+            XCTAssertNotNil(movie.releaseDate)
+            XCTAssertNotNil(movie.coverURL)
+            XCTAssertNotNil(movie.duration)
+            XCTAssertNotNil(movie.genre)
+            XCTAssertNotNil(movie.price)
         } catch {
             XCTFail()
         }
     }
-    
+    /*
     func testPersistOnUserDefaults() {
         let userDefaults = UserDefaults.init(suiteName: "tests")!
         let bookKey = "bookKey"
