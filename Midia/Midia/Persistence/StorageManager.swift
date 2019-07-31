@@ -11,6 +11,6 @@ import Foundation
 class StorageManager {
 
     //static let shared: FavoritesProvidable = UserDefaultStorageManager(withMediaItemKind: .book)
-    static let shared: FavoritesProvidable = CoreDataStorageManager(withMediaItemKind: .book)
+    static let shared: FavoritesProvidable = CoreDataStorageManager(withMediaItemKind: .movie)
 
 }

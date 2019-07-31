@@ -18,6 +18,6 @@ protocol MediaItemDetailedProvidable {
     var numberOfReviews: Int? { get }
     var creationDate: Date? { get }
     var price: Float? { get }
-    var description: String? { get }
+    var movieDescription: String? { get }
 
 }

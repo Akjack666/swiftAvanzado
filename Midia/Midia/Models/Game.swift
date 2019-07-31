@@ -18,6 +18,6 @@ struct Game: MediaItemProvidable, MediaItemDetailedProvidable {
     let numberOfReviews: Int? = nil
     let creationDate: Date? = nil
     let price: Float? = nil
-    let description: String? = nil
+    let movieDescription: String? = nil
 
 }

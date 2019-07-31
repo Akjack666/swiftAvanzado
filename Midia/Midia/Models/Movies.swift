@@ -15,7 +15,7 @@ struct Movies {
     let title: String
     let artistName: String?
     let releaseDate: Date?
-    let description: String?
+    let movieDescription: String?
     let coverURL: URL?
     let duration: Int?
     let genre: String?
@@ -28,7 +28,7 @@ struct Movies {
         self.title = title
         self.artistName = artistName
         self.releaseDate = releaseDate
-        self.description = description
+        self.movieDescription = description
         self.coverURL = coverURL
         self.duration = duration
         self.genre = genre
@@ -66,7 +66,7 @@ extension Movies: Codable {
         } else {
             releaseDate = nil
         }
-        description = try container.decodeIfPresent(String.self, forKey: .description)
+        movieDescription = try container.decodeIfPresent(String.self, forKey: .description)
         coverURL = try container.decodeIfPresent(URL.self, forKey: .coverURL)
         duration = try container.decodeIfPresent(Int.self, forKey: .duration)
         genre = try container.decodeIfPresent(String.self, forKey: .genre)
@@ -84,7 +84,7 @@ extension Movies: Codable {
         if let date = releaseDate {
             try container.encode(DateFormatter.movieAPIDateFormatter.string(from: date), forKey: .releaseDate)
         }
-        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(movieDescription, forKey: .description)
         try container.encodeIfPresent(coverURL, forKey: .coverURL)
         try container.encodeIfPresent(duration, forKey: .duration)
         try container.encodeIfPresent(genre, forKey: .genre)

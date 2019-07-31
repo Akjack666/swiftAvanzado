@@ -64,7 +64,7 @@ class BookTests: XCTestCase {
             XCTAssertNotNil(book.authors)
             XCTAssert(book.authors!.count > 0)
             XCTAssertNotNil(book.publishedDate)
-            XCTAssertNotNil(book.description)
+            XCTAssertNotNil(book.movieDescription)
             XCTAssertNotNil(book.coverURL)
             XCTAssertNotNil(book.rating)
             XCTAssertNotNil(book.numberOfReviews)

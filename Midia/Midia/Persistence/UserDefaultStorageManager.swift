@@ -25,8 +25,8 @@ class UserDefaultStorageManager: FavoritesProvidable {
     func getFavorites() -> [MediaItemDetailedProvidable]? {
         if let favoritesData = userDefaults.data(forKey: favoritesKey) {
             switch mediaItemKind {
-            case .book:
-                return try? decoder.decode([Book].self, from: favoritesData)
+            case .movie:
+                return try? decoder.decode([Movies].self, from: favoritesData)
             default:
                 fatalError("Media kind `\(mediaItemKind)` not supported yet")
             }
@@ -68,8 +68,8 @@ class UserDefaultStorageManager: FavoritesProvidable {
     private func save(_ favorites: [MediaItemDetailedProvidable]) {
         do {
             switch mediaItemKind {
-            case .book:
-                userDefaults.set(try encoder.encode(favorites as! [Book]), forKey: favoritesKey)
+            case .movie:
+                userDefaults.set(try encoder.encode(favorites as! [Movies]), forKey: favoritesKey)
             default:
                 fatalError("not supported yet")
             }

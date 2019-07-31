@@ -40,7 +40,7 @@ class MovieTests: XCTestCase {
             let firstMovie = movieCollection.results?.first!
             XCTAssertNotNil(firstMovie?.movieId)
             XCTAssertNotNil(firstMovie?.artistName)
-            XCTAssertNotNil(firstMovie?.description)
+            XCTAssertNotNil(firstMovie?.movieDescription)
             XCTAssertNotNil(firstMovie?.releaseDate)
             XCTAssertNotNil(firstMovie?.coverURL)
             XCTAssertNotNil(firstMovie?.duration)
@@ -68,7 +68,7 @@ class MovieTests: XCTestCase {
             XCTAssertNotNil(movie)
             XCTAssertNotNil(movie.movieId)
             XCTAssertNotNil(movie.artistName)
-            XCTAssertNotNil(movie.description)
+            XCTAssertNotNil(movie.movieDescription)
             XCTAssertNotNil(movie.releaseDate)
             XCTAssertNotNil(movie.coverURL)
             XCTAssertNotNil(movie.duration)

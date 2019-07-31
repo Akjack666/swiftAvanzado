@@ -57,7 +57,7 @@ class CoreDataStorageManager: FavoritesProvidable {
             bookManaged.bookTitle = book.title
             bookManaged.publishedDate = book.publishedDate
             bookManaged.coverURL = book.coverURL?.absoluteString
-            bookManaged.bookDescription = book.description
+            bookManaged.bookDescription = book.movieDescription
             if let rating = book.rating {
                 bookManaged.rating = rating
             }

@@ -14,7 +14,7 @@ struct Book {
     let title: String
     let authors: [String]?
     let publishedDate: Date?
-    let description: String?
+    let movieDescription: String?
     let coverURL: URL?
     let rating: Float?
     let numberOfReviews: Int?
@@ -25,7 +25,7 @@ struct Book {
         self.title = title
         self.authors = authors
         self.publishedDate = publishedDate
-        self.description = description
+        self.movieDescription = description
         self.coverURL = coverUrl
         self.rating = rating
         self.numberOfReviews = numberOfReviews
@@ -65,7 +65,7 @@ extension Book: Codable {
         } else {
             publishedDate = nil
         }
-        description = try volumeInfoContainer.decodeIfPresent(String.self, forKey: .description)
+        movieDescription = try volumeInfoContainer.decodeIfPresent(String.self, forKey: .description)
 
         // Es posible que no haya imageLinkContainer, entonces ponemos try? para asegurarnos que está al hacer el decode.
         let imageLinkContainer = try? volumeInfoContainer.nestedContainer(keyedBy: CodingKeys.self, forKey: .imageLinks)
@@ -90,7 +90,7 @@ extension Book: Codable {
         if let date = publishedDate {
             try volumeInfoContainer.encode(DateFormatter.booksAPIDateFormatter.string(from: date), forKey: .publishedDate)
         }
-        try volumeInfoContainer.encodeIfPresent(description, forKey: .description)
+        try volumeInfoContainer.encodeIfPresent(movieDescription, forKey: .description)
 
         var imageLinksContainer = volumeInfoContainer.nestedContainer(keyedBy: CodingKeys.self, forKey: .imageLinks)
         try imageLinksContainer.encodeIfPresent(coverURL, forKey: .coverURL)

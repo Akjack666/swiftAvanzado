@@ -71,7 +71,7 @@ class DetailViewController: UIViewController {
         titleLabel.text = mediaItem.title
 
         // Me vale que sea nil
-        descriptionTextView.text = mediaItem.description
+        descriptionTextView.text = mediaItem.movieDescription
 
         if let url = mediaItem.imageURL {
             imageView.loadImage(fromURL: url)
