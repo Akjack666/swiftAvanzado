@@ -113,11 +113,11 @@ extension Movies: MediaItemDetailedProvidable {
     }
     
     var rating: Float? {
-        return price
+        return nil
     }
     
     var numberOfReviews: Int? {
-        return duration
+        return nil
     }
     
     var creationDate: Date? {

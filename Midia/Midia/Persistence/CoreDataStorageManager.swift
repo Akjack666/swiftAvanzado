@@ -22,8 +22,8 @@ class CoreDataStorageManager: FavoritesProvidable {
 
     func getFavorites() -> [MediaItemDetailedProvidable]? {
         let context = stack.persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<BookManaged> = BookManaged.fetchRequest()
-        let dateSortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "publishedDate", ascending: true)
+        let fetchRequest: NSFetchRequest<MovieManaged> = MovieManaged.fetchRequest()
+        let dateSortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "releaseDate", ascending: true)
         let priceSortDescriptor = NSSortDescriptor(key: "price", ascending: false)
         fetchRequest.sortDescriptors = [dateSortDescriptor, priceSortDescriptor]
         do {
@@ -37,8 +37,8 @@ class CoreDataStorageManager: FavoritesProvidable {
 
     func getFavorite(byId favoriteId: String) -> MediaItemDetailedProvidable? {
         let context = stack.persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<BookManaged> = BookManaged.fetchRequest()
-        let predicate: NSPredicate = NSPredicate(format: "bookId = %@", favoriteId)
+        let fetchRequest: NSFetchRequest<MovieManaged> = MovieManaged.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "movieId = %@", favoriteId)
         fetchRequest.predicate = predicate
         do {
             let favorites = try context.fetch(fetchRequest)
@@ -51,27 +51,18 @@ class CoreDataStorageManager: FavoritesProvidable {
 
     func add(favorite: MediaItemDetailedProvidable) {
         let context = stack.persistentContainer.viewContext
-        if let book = favorite as? Book {
-            let bookManaged = BookManaged(context: context)
-            bookManaged.bookId = book.bookId
-            bookManaged.bookTitle = book.title
-            bookManaged.publishedDate = book.publishedDate
-            bookManaged.coverURL = book.coverURL?.absoluteString
-            bookManaged.bookDescription = book.movieDescription
-            if let rating = book.rating {
-                bookManaged.rating = rating
+        if let movie = favorite as? Movies {
+            let movieManaged = MovieManaged(context: context)
+            movieManaged.movieId = Int32(movie.movieId)
+            movieManaged.title = movie.title
+            movieManaged.releaseDate = movie.releaseDate
+            movieManaged.coverURL = movie.coverURL?.absoluteString
+            movieManaged.movieDescription = movie.movieDescription
+            if let price = movie.price {
+                movieManaged.price = price
             }
-            if let numberOfReviews = book.numberOfReviews {
-                bookManaged.numberOfReviews = Int32(numberOfReviews)
-            }
-            if let price = book.price {
-                bookManaged.price = price
-            }
-            book.authors?.forEach({ (authorName) in
-                let author = Author(context: context)
-                author.fullName = authorName
-                bookManaged.addToAuthors(author)
-            })
+            
+        
             do {
                 try context.save()
             } catch {
@@ -85,13 +76,13 @@ class CoreDataStorageManager: FavoritesProvidable {
 
     func remove(favoriteWithId favoriteId: String) {
         let context = stack.persistentContainer.viewContext
-        let fetchRequest: NSFetchRequest<BookManaged> = BookManaged.fetchRequest()
-        let predicate: NSPredicate = NSPredicate(format: "bookId = %@", favoriteId)
+        let fetchRequest: NSFetchRequest<MovieManaged> = MovieManaged.fetchRequest()
+        let predicate: NSPredicate = NSPredicate(format: "movieId = %@", favoriteId)
         fetchRequest.predicate = predicate
         do {
             let favorites = try context.fetch(fetchRequest)
-            favorites.forEach({ (bookManaged) in
-                context.delete(bookManaged)
+            favorites.forEach({ (movieManaged) in
+                context.delete(movieManaged)
             })
             try context.save()
 
